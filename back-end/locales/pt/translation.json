@@ -1,0 +1,12 @@
+{
+    "header": {
+        "title": "Controle de Produtos"
+    },
+    "footer": {
+        "copy": "© 2024 Controle de Produtos. Todos os direitos reservados."
+    },
+    "config": {
+        "languageSelection": "Selecione seu idioma preferido:",
+        "languageLabel": "Idioma:"
+    }
+}

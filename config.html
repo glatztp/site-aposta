@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações de Idioma</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/i18next@latest/dist/umd/i18next.min.js"></script>
+    <script src="https://unpkg.com/i18next-browser-languagedetector@latest/dist/umd/i18nextBrowserLanguageDetector.min.js"></script>
+    <script src="https://unpkg.com/i18next-http-backend@latest/dist/umd/i18nextHttpBackend.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1 id="header-title">Configurações de Idioma</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produto.html">Adicionar Produtos</a>
+            <a href="retirada.html">Retiradas</a>
+            <a href="totais.html">Totais</a>
+            <a href="contato.html">Contato</a>
+            <a href="planos.html">Planos</a>
+            <a href="config.html" class="language-button">Configuração de Idioma</a>
+            <button id="logout-button">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="config">
+            <h2 id="config-language-selection">Selecione seu idioma preferido:</h2>
+            <form id="language-form">
+                <label for="language-select" id="config-language-label">Idioma:</label>
+                <select id="language-select" name="language">
+                    <option value="pt">Português</option>
+                    <option value="en">Inglês</option>
+                </select>
+                <button type="submit">Salvar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-copy">&copy; 2024 Controle de Produtos. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="config.js"></script>
+</body>
+</html>

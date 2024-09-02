@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produtos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="perfil.html" class="profile-icon">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQHD4v1I43U4FQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1698373794214?e=2147483647&v=beta&t=iIfPmoEJZj3zIntWCFG_gXWHgoES7cpcCyy3l4uqu8A" alt="Perfil">
+        </a>
+        <h1>Controle de Produtos</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produto.html">Adicionar Produtos</a>
+            <a href="retirada.html">Retiradas</a>
+            <a href="totais.html">Totais</a>
+            <a href="contato.html">Contato</a>
+            <a href="planos.html">Planos</a>
+            <button id="logout-button">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Adicionar Produtos</h2>
+        <form action="#" method="post">
+            <label for="product-name">Nome do Produto:</label>
+            <input type="text" id="product-name" name="product-name" required>
+
+            <label for="product-quantity">Quantidade:</label>
+            <input type="number" id="product-quantity" name="product-quantity" required>
+
+            <label for="product-price">Valor Unitário:</label>
+            <input type="number" id="product-price" name="product-price" step="0.01" required>
+
+            <button type="submit">Adicionar Produto</button>
+        </form>
+
+        <section class="comentarios-avaliacoes">
+            <h2>Comentários e Avaliações</h2>
+            <form id="comentarioForm">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="comentario">Comentário:</label>
+                <textarea id="comentario" name="comentario" rows="4" required></textarea>
+
+                <label for="avaliacao">Avaliação:</label>
+                <select id="avaliacao" name="avaliacao" required>
+                    <option value="1">1 Estrela</option>
+                    <option value="2">2 Estrelas</option>
+                    <option value="3">3 Estrelas</option>
+                    <option value="4">4 Estrelas</option>
+                    <option value="5">5 Estrelas</option>
+                </select>
+
+                <button type="submit">Enviar Comentário</button>
+            </form>
+
+            <!-- Seção para exibir comentários -->
+            <div id="comentariosList">
+                <h3>Comentários Recentes</h3>
+                <!-- Comentários serão exibidos aqui -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Controle de Produtos. Todos os direitos reservados.</p>
+    </footer>
+    <script>// Comentarios.js
+
+        document.getElementById('comentarioForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+        
+          const nome = document.getElementById('nome').value;
+          const comentario = document.getElementById('comentario').value;
+          const avaliacao = document.getElementById('avaliacao').value;
+        
+          // Adiciona o comentário à lista
+          adicionarComentario(nome, comentario, avaliacao);
+        
+          // Limpa o formulário
+          document.getElementById('comentarioForm').reset();
+        });
+        
+        function adicionarComentario(nome, comentario, avaliacao) {
+          // Adiciona o novo comentário ao array de dados fictícios
+          const comentarioDiv = document.createElement('div');
+          comentarioDiv.classList.add('comentario-item');
+          comentarioDiv.innerHTML = `
+              <h4>${nome} <span class="avaliacao">${'★'.repeat(avaliacao)}</span></h4>
+              <p>${comentario}</p>
+          `;
+          document.getElementById('comentariosList').appendChild(comentarioDiv);
+        }
+        
+        // Inicializa a exibição dos comentários ao carregar a página
+        function inicializarComentarios() {
+          // Dados fictícios de comentários
+          const fakeData = [
+              { nome: 'João', comentario: 'Ótimo produto!', avaliacao: 5 },
+              { nome: 'Maria', comentario: 'Chegou rápido, mas veio com defeito.', avaliacao: 3 },
+              { nome: 'Ana', comentario: 'Excelente atendimento.', avaliacao: 4 }
+          ];
+        
+          fakeData.forEach(comentario => adicionarComentario(comentario.nome, comentario.comentario, comentario.avaliacao));
+        }
+        
+        // Chama a função de inicialização
+        inicializarComentarios();
+        </script>
+</body>
+</html>

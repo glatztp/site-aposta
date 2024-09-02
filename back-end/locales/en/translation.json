@@ -1,0 +1,12 @@
+{
+  "header": {
+      "title": "Product Control"
+  },
+  "footer": {
+      "copy": "© 2024 Product Control. All rights reserved."
+  },
+  "config": {
+      "languageSelection": "Select your preferred language:",
+      "languageLabel": "Language:"
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <a href="perfil.html" class="profile-icon">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQHD4v1I43U4FQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1698373794214?e=2147483647&v=beta&t=iIfPmoEJZj3zIntWCFG_gXWHgoES7cpcCyy3l4uqu8A" alt="Perfil">
+        </a>
+        <h1>Controle de Produtos</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produto.html">Adicionar Produtos</a>
+            <a href="retirada.html">Retiradas</a>
+            <a href="totais.html">Totais</a>
+            <a href="contato.html">Contato</a>
+            <a href="planos.html">Planos</a>
+            <button id="logout-button">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Entre em Contato Conosco</h2>
+            <p>Estamos aqui para ajudar com qualquer dúvida ou questão. Preencha o formulário abaixo ou encontre-nos no nosso escritório.</p>
+
+            <!-- Formulário de Contato -->
+            <form action="#" method="post" class="contact-form">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Mensagem:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+        <section class="map">
+          <h2>Nosso Escritório</h2>
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.799863934512!2d-49.071215!3d-26.492419!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d7f5a6f6f6f6f6%3A0x246adf4c8a183726!2sSENAI+Jaragu%C3%A1+do+Sul!5e0!3m2!1spt-BR!2sbr!4v1644181218437!5m2!1spt-BR!2sbr&marker=-26.492419,-49.071215"
+                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Controle de Produtos. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>

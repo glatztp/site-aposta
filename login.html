@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Controle de Produtos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Controle de Produtos</h1>
+    </header>
+
+    <main>
+        <h2>Login</h2>
+        <form id="login-form">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <p>Não tem uma conta? <a href="#" id="register-link">Registre-se aqui</a></p>
+
+        <!-- Botão de Login com Google -->
+        <div id="g-signin2"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Controle de Produtos. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Inclua o script do Google Sign-In e seu script JavaScript -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="script.js"></script> <!-- Inclua seu JavaScript aqui -->
+    <script src="back-end/auth.js"></script> <!-- Script adicional para autenticação -->
+</body>
+</html>

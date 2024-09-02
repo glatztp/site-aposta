@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totais de Produtos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <a href="perfil.html" class="profile-icon">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQHD4v1I43U4FQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1698373794214?e=2147483647&v=beta&t=iIfPmoEJZj3zIntWCFG_gXWHgoES7cpcCyy3l4uqu8A" alt="Perfil">
+        </a>
+        <h1>Controle de Produtos</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produto.html">Adicionar Produtos</a>
+            <a href="retirada.html">Retiradas</a>
+            <a href="totais.html">Totais</a>
+            <a href="contato.html">Contato</a>
+            <a href="planos.html">Planos</a>
+            <button id="logout-button">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Totais de Produtos</h2>
+
+        <!-- Gráficos -->
+        <h3>Distribuição Geral dos Produtos</h3>
+        <canvas id="generalProductChart" width="400" height="400"></canvas>
+
+        <h3>Distribuição por Categoria</h3>
+        <canvas id="categoryChart" width="400" height="400"></canvas>
+
+        <h3>Gastos e Prejuízos</h3>
+        <canvas id="expensesChart" width="400" height="400"></canvas>
+
+        <h3>Acesso de Usuários</h3>
+        <canvas id="userAccessChart" width="400" height="400"></canvas>
+
+        <h3>Desempenho dos Produtos</h3>
+        <canvas id="radarChart" width="400" height="400"></canvas>
+
+        <h3>Vendas ao Longo do Tempo</h3>
+        <canvas id="areaChart" width="400" height="400"></canvas>
+
+        <h3>Quantidade e Valor por Categoria</h3>
+        <canvas id="bubbleChart" width="400" height="400"></canvas>
+
+        <!-- Tabela de Totais -->
+        <h3>Totais dos Produtos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade Adicionada</th>
+                    <th>Quantidade Retirada</th>
+                    <th>Valor Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Produto A</td>
+                    <td>200</td>
+                    <td>50</td>
+                    <td>1500,00</td>
+                </tr>
+                <tr>
+                    <td>Produto B</td>
+                    <td>150</td>
+                    <td>30</td>
+                    <td>1200,00</td>
+                </tr>
+                <tr>
+                    <td>Produto C</td>
+                    <td>100</td>
+                    <td>20</td>
+                    <td>800,00</td>
+                </tr>
+                <tr>
+                    <td>Produto D</td>
+                    <td>250</td>
+                    <td>60</td>
+                    <td>2000,00</td>
+                </tr>
+                <tr>
+                    <td>Produto E</td>
+                    <td>180</td>
+                    <td>40</td>
+                    <td>1600,00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            // Gráficos
+            const generalCtx = document.getElementById('generalProductChart').getContext('2d');
+            new Chart(generalCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Adicionados', 'Retirados', 'Estoque', 'Devoluções', 'Perda'],
+                    datasets: [{
+                        label: 'Distribuição Geral dos Produtos',
+                        data: [300, 100, 150, 50, 30],
+                        backgroundColor: ['#36a2eb', '#ff6384', '#4ba353', '#ffcd56', '#c9cbcf'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribuição Geral dos Produtos',
+                            padding: {
+                                top: 10,
+                                bottom: 10
+                            }
+                        }
+                    }
+                }
+            });
+
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            new Chart(categoryCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Categoria 1', 'Categoria 2', 'Categoria 3', 'Categoria 4', 'Categoria 5'],
+                    datasets: [{
+                        label: 'Quantidade por Categoria',
+                        data: [100, 150, 200, 130, 170],
+                        backgroundColor: ['#ff9f40', '#ffcd56', '#4bc0c0', '#ff6384', '#36a2eb'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribuição por Categoria',
+                            padding: {
+                                top: 10,
+                                bottom: 10
+                            }
+                        }
+                    }
+                }
+            });
+
+            const expensesCtx = document.getElementById('expensesChart').getContext('2d');
+            new Chart(expensesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Gastos Fixos', 'Gastos Variáveis', 'Prejuízos', 'Investimentos', 'Economias'],
+                    datasets: [{
+                        label: 'Gastos e Prejuízos',
+                        data: [500, 200, 150, 300, 100],
+                        backgroundColor: ['#36a2eb', '#ff6384', '#ff9f40', '#ffcd56', '#4bc0c0'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Gastos e Prejuízos',
+                            padding: {
+                                top: 10,
+                                bottom: 10
+                            }
+                        }
+                    }
+                }
+            });
+
+            const userAccessCtx = document.getElementById('userAccessChart').getContext('2d');
+            const data = [150, 200, 250, 300, 250, 400, 350];
+            const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+            const backgroundColors = data.map((value, index) => {
+                if (index === 0) return 'rgba(75, 192, 192, 0.2)';
+                return data[index] > data[index - 1] ? 'rgba(75, 192, 192, 0.2)' : 'rgba(255, 99, 132, 0.2)';
+            });
+            const borderColors = data.map((value, index) => {
+                if (index === 0) return 'rgba(75, 192, 192, 1)';
+                return data[index] > data[index - 1] ? 'rgba(75, 192, 192, 1)' : 'rgba(255, 99, 132, 1)';
+            });
+
+            new Chart(userAccessCtx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Acesso de Usuários',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw;
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Acesso de Usuários',
+                            padding: {
+                                top: 10,
+                                bottom: 10
+                            }
+                        }
+                    }
+                }
+            });
+
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Categoria 1', 'Categoria 2', 'Categoria 3', 'Categoria 4', 'Categoria 5'],
+                    datasets: [{
+                        label: 'Desempenho de Produtos',
+                        data: [65, 59, 90, 81, 56],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+
+            const areaCtx = document.getElementById('areaChart').getContext('2d');
+            new Chart(areaCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Vendas Totais',
+                        data: [10, 50, 80, 120, 150, 170, 200],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: true // Preencher a área sob a linha
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            const bubbleCtx = document.getElementById('bubbleChart').getContext('2d');
+            new Chart(bubbleCtx, {
+                type: 'bubble',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Produto A',
+                            data: [
+                                { x: 10, y: 20, r: 15 }, // r é o raio da bolha
+                                { x: 15, y: 30, r: 10 }
+                            ],
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Produto B',
+                            data: [
+                                { x: 25, y: 10, r: 20 },
+                                { x: 30, y: 20, r: 15 }
+                            ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Quantidade'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Valor'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Controle de Produtos. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

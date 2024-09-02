@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Produtos</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Adicione o CSS específico aqui se necessário */
+    </style>
+</head>
+<body>
+    <header>
+        <a href="perfil.html" class="profile-icon">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQHD4v1I43U4FQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1698373794214?e=2147483647&v=beta&t=iIfPmoEJZj3zIntWCFG_gXWHgoES7cpcCyy3l4uqu8A" alt="Perfil">
+        </a>
+        <h1>Controle de Produtos</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="produto.html">Adicionar Produtos</a>
+            <a href="retirada.html">Retiradas</a>
+            <a href="totais.html">Totais</a>
+            <a href="contato.html">Contato</a>
+            <a href="planos.html">Planos</a>
+        
+            <a href="config.html" class="language-button">Configuração de Idioma</a>
+        
+
+            <button id="logout-button">Logout</button>
+        </nav>
+        
+    </header>
+
+    <main>
+        <!-- Sistema de Busca Avançada -->
+<section class="search">
+    <h2>Buscar Produtos</h2>
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Pesquisar produtos...">
+        <button type="submit">Buscar</button>
+    </form>
+</section>
+
+      <!-- Botão SAC -->
+<button id="sac-button" class="fixed-bottom-right">
+    <img src="https://cdn-icons-png.flaticon.com/512/4240/4240358.png" alt="SAC">
+</button>
+
+<!-- Mini Chat -->
+<div id="chat-widget" class="chat-widget">
+    <div class="chat-header">
+        <h4>Chat de Suporte</h4>
+        <button id="close-chat" class="close-button">✖</button>
+    </div>
+    <div class="chat-body">
+        <!-- Mensagens do chat aparecerão aqui -->
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chat-input" placeholder="Digite sua mensagem...">
+        <button id="send-message">Enviar</button>
+    </div>
+    <div class="predefined-responses">
+        <button class="predefined-response" data-response="Qual é o horário de funcionamento?">Qual é o horário de funcionamento?</button>
+        <button class="predefined-response" data-response="Como faço para devolver um produto?">Como faço para devolver um produto?</button>
+        <button class="predefined-response" data-response="Onde posso encontrar informações sobre o meu pedido?">Onde posso encontrar informações sobre o meu pedido?</button>
+        <!-- Adicione mais botões conforme necessário -->
+    </div>
+</div>
+
+
+
+      <!-- Carrossel de Imagens -->
+      <div class="carousel">
+          <div class="carousel-images">
+              <div class="carousel-slide"><img src="https://www.designi.com.br/images/preview/10025278.jpg" alt="Imagem 1"></div>
+              <div class="carousel-slide"><img src="https://img.freepik.com/psd-premium/modelo-de-postagem-de-capa-de-midia-social-e-produto-de-marca-de-fone-de-ouvido_264308-116.jpg?w=996" alt="Imagem 2"></div>
+          </div>
+          <button class="prev" onclick="prevSlide()">❮</button>
+          <button class="next" onclick="nextSlide()">❯</button>
+      </div>
+      
+
+      <!-- Introdução ao Site -->
+      <section class="intro">
+          <h2>Bem-vindo ao Controle de Produtos</h2>
+          <p>Gerencie seus produtos de forma eficiente com nossas ferramentas. Nossa plataforma permite que você adicione novos produtos, registre retiradas, e acompanhe os totais com facilidade.</p>
+          <p>Com uma interface intuitiva e fácil de usar, você terá um controle completo sobre seus inventários. Aproveite nossos recursos para otimizar a gestão dos seus produtos e obter relatórios detalhados sobre suas movimentações e finanças.</p>
+          <p>Explore as funcionalidades da nossa plataforma e descubra como podemos ajudar a melhorar a eficiência do seu gerenciamento de produtos.</p>
+      </section>
+
+      <!-- Funcionalidades -->
+      <div class="funcionalidade">
+          <h2>Funcionalidades</h2>
+          <div class="main-buttons">
+              <a href="produto.html" class="btn">Adicionar Produtos</a>
+              <a href="retirada.html" class="btn">Retirar Produtos</a>
+              <a href="totais.html" class="btn">Controle de Gastos</a>
+              <a href="historico.html" class="btn">Histórico</a> <!-- Novo botão -->
+          </div>
+      </div>
+
+      <!-- Sobre o Site -->
+      <section class="sobre">
+          <h2>Sobre o Site</h2>
+          <p>O Controle de Produtos é uma ferramenta desenvolvida para ajudar empresas e indivíduos a gerenciar seus inventários de forma eficiente. Nosso objetivo é simplificar o processo de controle de produtos e oferecer uma visão clara sobre movimentações e despesas.</p>
+          <p>Com recursos avançados e uma interface amigável, você pode adicionar e remover produtos com facilidade, registrar retiradas e acessar relatórios detalhados. Nossa plataforma foi projetada para ser fácil de usar e atender às necessidades de todos os tipos de usuários.</p>
+          <p>Se você tiver alguma dúvida ou sugestão, não hesite em entrar em contato conosco através da seção de contato. Estamos aqui para ajudar!</p>
+      </section>
+    </main>
+    
+<section class="dashboard">
+    <h2>Dashboard</h2>
+    <div class="dashboard-cards">
+        <div class="card">
+            <h3>Total de Produtos</h3>
+            <p id="total-products">0</p>
+        </div>
+        <div class="card">
+            <h3>Vendas Recentes</h3>
+            <p id="recent-sales">$0.00</p>
+        </div>
+        <div class="card">
+            <h3>Despesas Recentes</h3>
+            <p id="recent-expenses">$0.00</p>
+        </div>
+    </div>
+</section>
+<!-- Sistema de Alertas -->
+<section class="alerts">
+    <h2>Alertas</h2>
+    <div id="alert-container">
+        <!-- Alertas serão adicionados dinamicamente aqui -->
+    </div>
+</section>
+<!-- Botões de Compartilhamento Social -->
+<div class="social-share">
+    <a href="https://www.facebook.com/sharer/sharer.php?u=YOUR_URL" target="_blank" class="social-button facebook">Facebook</a>
+    <a href="https://x.com/intent/tweet?url=YOUR_URL" target="_blank" class="social-button x">X</a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=YOUR_URL" target="_blank" class="social-button linkedin">LinkedIn</a>
+</div>
+
+    
+    <footer>
+        <p>&copy; 2024 Controle de Produtos. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="back-end/auth.js"></script>
+    <script>
+        // Verifica se o usuário está autenticado
+        if (!localStorage.getItem('loggedInUser')) {
+            console.log('Usuário não autenticado. Redirecionando para a página de login...');
+            window.location.href = 'login.html';
+        } else {
+            console.log('Usuário autenticado: ', localStorage.getItem('loggedInUser'));
+        }
+        
+    function addAlert(message, type) {
+        const alertContainer = document.getElementById('alert-container');
+        const alert = document.createElement('div');
+        alert.className = `alert alert-${type}`;
+        alert.innerText = message;
+        alertContainer.appendChild(alert);
+    }
+
+    // Exemplo de uso
+    addAlert('Produto com estoque baixo!', 'warning');
+    addAlert('Venda realizada com sucesso!', 'info');
+    addAlert('Erro ao registrar a retirada.', 'error');
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const sacButton = document.getElementById('sac-button');
+    const chatWidget = document.getElementById('chat-widget');
+    const closeChatButton = document.getElementById('close-chat');
+    const sendMessageButton = document.getElementById('send-message');
+    const chatInput = document.getElementById('chat-input');
+    const predefinedResponses = document.querySelectorAll('.predefined-response');
+
+    sacButton.addEventListener('click', function () {
+        chatWidget.style.display = chatWidget.style.display === 'none' || chatWidget.style.display === '' ? 'flex' : 'none';
+    });
+
+    closeChatButton.addEventListener('click', function () {
+        chatWidget.style.display = 'none';
+    });
+
+    sendMessageButton.addEventListener('click', function () {
+        sendMessage();
+    });
+
+    chatInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Evita a quebra de linha no campo de texto
+            sendMessage();
+        }
+    });
+
+    predefinedResponses.forEach(button => {
+        button.addEventListener('click', function () {
+            const message = button.getAttribute('data-response');
+            addMessage('user', message);
+
+            // Simulação de resposta do bot
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                addMessage('bot', botResponse);
+            }, 1000);
+        });
+    });
+
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+            addMessage('user', message);
+            chatInput.value = '';
+
+            // Simulação de resposta do bot
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                addMessage('bot', botResponse);
+            }, 1000);
+        }
+    }
+
+    function addMessage(sender, text) {
+        const chatBody = document.querySelector('.chat-body');
+        const message = document.createElement('div');
+        message.className = `message ${sender}-message`;
+        
+        // Adiciona a hora atual
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        message.innerHTML = `<p>${text}</p><span class="timestamp">${timestamp}</span>`;
+        chatBody.appendChild(message);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function getBotResponse(userMessage) {
+        // Normaliza a mensagem
+        const normalizedMessage = userMessage.toLowerCase().trim();
+
+        // Respostas básicas e correspondências
+        const responses = {
+            "horário de funcionamento": "Nosso horário de funcionamento é de segunda a sexta, das 9h às 18h.",
+            "devolver produto": "Para devolver um produto, entre em contato com nosso suporte através do e-mail suporte@exemplo.com.",
+            "informações sobre pedido": "Você pode encontrar informações sobre o seu pedido na seção 'Histórico' do nosso site.",
+            "como posso ajudar": "Estou aqui para ajudar! Por favor, diga-me o que você precisa.",
+            "desculpe": "Desculpe, não entendi sua pergunta. Poderia reformular?",
+            "endereço": "Estamos localizados na Rua Exemplo, 123, São Paulo, SP.",
+            "telefone": "Você pode entrar em contato conosco pelo telefone (11) 1234-5678.",
+            "e-mail": "Nosso e-mail de contato é contato@exemplo.com.",
+            "horário de atendimento": "O horário de atendimento é das 9h às 18h, de segunda a sexta-feira.",
+            "formato de pagamento": "Aceitamos pagamentos por cartão de crédito, boleto e transferência bancária.",
+            "política de privacidade": "Você pode ler nossa política de privacidade em nossa página de Política de Privacidade.",
+            "termos de serviço": "Os termos de serviço estão disponíveis em nossa página de Termos de Serviço.",
+            "como criar uma conta": "Para criar uma conta, clique em 'Registrar' no canto superior direito e siga as instruções.",
+            "como resetar senha": "Para resetar sua senha, clique em 'Esqueci a senha' na página de login e siga as instruções.",
+            "status do pedido": "Para verificar o status do seu pedido, acesse a seção 'Histórico' e veja o status atual.",
+            "atualizar informações pessoais": "Para atualizar suas informações pessoais, vá para 'Perfil' e edite as informações desejadas.",
+            "cancelar pedido": "Para cancelar um pedido, entre em contato com nosso suporte o mais rápido possível.",
+            "feedback": "Agradecemos seu feedback! Envie suas sugestões para feedback@exemplo.com.",
+            "reclamações": "Para reclamações, por favor, entre em contato com nosso suporte através do e-mail suporte@exemplo.com.",
+            "promoções": "Para ficar por dentro das nossas promoções, siga-nos nas redes sociais e assine nossa newsletter.",
+            "loja física": "Nossa loja física está localizada na Rua Exemplo, 123, São Paulo, SP.",
+            "comprar online": "Você pode comprar nossos produtos diretamente no nosso site na seção 'Produtos'.",
+            "suporte técnico": "Para suporte técnico, entre em contato com nossa equipe de suporte pelo e-mail suporte@exemplo.com.",
+            "problema com pagamento": "Se você está enfrentando problemas com o pagamento, entre em contato com nosso suporte para assistência.",
+            "entrega": "A entrega dos produtos é realizada em até 5 dias úteis após a confirmação do pagamento.",
+            "prazo de entrega": "O prazo de entrega varia de acordo com a sua localização. Você pode consultar o prazo estimado na finalização da compra.",
+            "rascunho": "Se você precisa de ajuda com rascunhos, entre em contato com nosso suporte técnico.",
+            "parceria": "Para informações sobre parcerias, envie um e-mail para parceria@exemplo.com.",
+            "ajuda geral": "Para ajuda geral, basta perguntar e faremos o possível para ajudar.",
+            "horário de almoço": "O horário de almoço da equipe é das 12h às 13h.",
+            "produto em falta": "Se um produto está em falta, você pode solicitar para ser notificado quando ele estiver disponível novamente.",
+            "resumo de compra": "Você pode acessar o resumo das suas compras na seção 'Histórico'.",
+            "mudar endereço": "Para mudar seu endereço, acesse sua conta e atualize as informações de endereço.",
+            "estorno": "Para solicitar um estorno, entre em contato com nosso suporte com os detalhes da sua compra.",
+            "compra internacional": "Aceitamos compras internacionais. Verifique as opções de envio disponíveis na finalização da compra.",
+            "valores": "Os valores dos produtos são exibidos na página de cada item e na finalização da compra.",
+            "frete": "O frete é calculado com base no peso do produto e no endereço de entrega.",
+            "número de rastreamento": "O número de rastreamento é enviado para seu e-mail após o despacho do pedido.",
+            "embalagem": "Nossos produtos são embalados com cuidado para garantir que cheguem em perfeitas condições.",
+            "comprar em grande quantidade": "Para compras em grande quantidade, entre em contato conosco para obter um orçamento.",
+            "aplicativos móveis": "Estamos desenvolvendo aplicativos móveis para facilitar o acesso aos nossos serviços.",
+            "sugestões": "Para sugestões, entre em contato conosco através do e-mail sugestões@exemplo.com.",
+            "novidades": "Fique atualizado sobre nossas novidades seguindo nossas redes sociais e assinando nossa newsletter.",
+            "assinar newsletter": "Você pode se inscrever na nossa newsletter no rodapé do site.",
+            "opções de pagamento": "Oferecemos várias opções de pagamento, incluindo cartão de crédito, boleto e transferência bancária.",
+            "programas de fidelidade": "Atualmente, não temos um programa de fidelidade, mas estamos trabalhando para implementar um.",
+            "ajuda técnica": "Para ajuda técnica, entre em contato com nossa equipe de suporte pelo e-mail suporte@exemplo.com.",
+            "recibo": "O recibo da sua compra será enviado para o e-mail cadastrado após a confirmação do pagamento.",
+            "contato": "Você pode entrar em contato conosco através do e-mail contato@exemplo.com ou pelo telefone (11) 1234-5678.",
+            "alterar dados pessoais": "Para alterar seus dados pessoais, acesse a seção 'Perfil' do seu cadastro.",
+            "estágio do pedido": "Você pode acompanhar o estágio do seu pedido na seção 'Histórico'.",
+            "endereços de entrega": "Você pode gerenciar seus endereços de entrega na seção 'Perfil'.",
+            "trocas": "Para solicitar uma troca, entre em contato com nosso suporte e informe o motivo da troca.",
+            "comprar presente": "Você pode comprar um presente e enviar diretamente para a pessoa desejada através do nosso site.",
+            "promoções atuais": "Verifique nossas promoções atuais na página principal do nosso site.",
+            "prazos de pagamento": "Os prazos de pagamento variam de acordo com a opção escolhida durante a compra.",
+            "certificados": "Os certificados de garantia são enviados junto com os produtos e também estão disponíveis na sua conta.",
+            "apoio ao cliente": "Nosso suporte ao cliente está disponível por e-mail e telefone. Consulte a seção de contato para mais informações.",
+            "envios": "Os envios são realizados diariamente e o prazo de entrega é calculado com base na localização do destinatário."
+        };
+
+        // Processa perguntas comuns com variações
+        if (normalizedMessage.includes('horário') || normalizedMessage.includes('funcionamento')) {
+            return responses["horário de funcionamento"];
+        }
+        if (normalizedMessage.includes('devolver') || normalizedMessage.includes('produto')) {
+            return responses["devolver produto"];
+        }
+        if (normalizedMessage.includes('informações') || normalizedMessage.includes('pedido')) {
+            return responses["informações sobre pedido"];
+        }
+        if (normalizedMessage.includes('ajudar') || normalizedMessage.includes('ajuda')) {
+            return responses["como posso ajudar"];
+        }
+        if (normalizedMessage.includes('desculpe') || normalizedMessage.includes('não entendi')) {
+            return responses["desculpe"];
+        }
+        if (normalizedMessage.includes('endereço')) {
+            return responses["endereço"];
+        }
+        if (normalizedMessage.includes('telefone')) {
+            return responses["telefone"];
+        }
+        if (normalizedMessage.includes('e-mail')) {
+            return responses["e-mail"];
+        }
+        if (normalizedMessage.includes('atendimento')) {
+            return responses["horário de atendimento"];
+        }
+        if (normalizedMessage.includes('pagamento')) {
+            return responses["formato de pagamento"];
+        }
+        if (normalizedMessage.includes('privacidade')) {
+            return responses["política de privacidade"];
+        }
+        if (normalizedMessage.includes('termos')) {
+            return responses["termos de serviço"];
+        }
+        if (normalizedMessage.includes('criar conta')) {
+            return responses["como criar uma conta"];
+        }
+        if (normalizedMessage.includes('resetar senha')) {
+            return responses["como resetar senha"];
+        }
+        if (normalizedMessage.includes('status') || normalizedMessage.includes('pedido')) {
+            return responses["status do pedido"];
+        }
+        if (normalizedMessage.includes('atualizar') || normalizedMessage.includes('informações pessoais')) {
+            return responses["atualizar informações pessoais"];
+        }
+        if (normalizedMessage.includes('cancelar pedido')) {
+            return responses["cancelar pedido"];
+        }
+        if (normalizedMessage.includes('feedback')) {
+            return responses["feedback"];
+        }
+        if (normalizedMessage.includes('reclamação')) {
+            return responses["reclamações"];
+        }
+        if (normalizedMessage.includes('promoção')) {
+            return responses["promoções"];
+        }
+        if (normalizedMessage.includes('loja') || normalizedMessage.includes('física')) {
+            return responses["loja física"];
+        }
+        if (normalizedMessage.includes('comprar') || normalizedMessage.includes('online')) {
+            return responses["comprar online"];
+        }
+        if (normalizedMessage.includes('suporte') || normalizedMessage.includes('técnico')) {
+            return responses["suporte técnico"];
+        }
+        if (normalizedMessage.includes('problema') || normalizedMessage.includes('pagamento')) {
+            return responses["problema com pagamento"];
+        }
+        if (normalizedMessage.includes('entrega')) {
+            return responses["entrega"];
+        }
+        if (normalizedMessage.includes('prazo') || normalizedMessage.includes('entrega')) {
+            return responses["prazo de entrega"];
+        }
+        if (normalizedMessage.includes('rascunho')) {
+            return responses["rascunho"];
+        }
+        if (normalizedMessage.includes('parceria')) {
+            return responses["parceria"];
+        }
+        if (normalizedMessage.includes('ajuda geral')) {
+            return responses["ajuda geral"];
+        }
+        if (normalizedMessage.includes('horário de almoço')) {
+            return responses["horário de almoço"];
+        }
+        if (normalizedMessage.includes('produto') || normalizedMessage.includes('falta')) {
+            return responses["produto em falta"];
+        }
+        if (normalizedMessage.includes('resumo') || normalizedMessage.includes('compra')) {
+            return responses["resumo de compra"];
+        }
+        if (normalizedMessage.includes('mudar') || normalizedMessage.includes('endereço')) {
+            return responses["mudar endereço"];
+        }
+        if (normalizedMessage.includes('estorno')) {
+            return responses["estorno"];
+        }
+        if (normalizedMessage.includes('internacional')) {
+            return responses["compra internacional"];
+        }
+        if (normalizedMessage.includes('valores')) {
+            return responses["valores"];
+        }
+        if (normalizedMessage.includes('frete')) {
+            return responses["frete"];
+        }
+        if (normalizedMessage.includes('número de rastreamento')) {
+            return responses["número de rastreamento"];
+        }
+        if (normalizedMessage.includes('embalagem')) {
+            return responses["embalagem"];
+        }
+        if (normalizedMessage.includes('grande quantidade')) {
+            return responses["comprar em grande quantidade"];
+        }
+        if (normalizedMessage.includes('aplicativos móveis')) {
+            return responses["aplicativos móveis"];
+        }
+        if (normalizedMessage.includes('sugestões')) {
+            return responses["sugestões"];
+        }
+        if (normalizedMessage.includes('novidades')) {
+            return responses["novidades"];
+        }
+        if (normalizedMessage.includes('assinar') || normalizedMessage.includes('newsletter')) {
+            return responses["assinar newsletter"];
+        }
+        if (normalizedMessage.includes('opções de pagamento')) {
+            return responses["opções de pagamento"];
+        }
+        if (normalizedMessage.includes('programa de fidelidade')) {
+            return responses["programas de fidelidade"];
+        }
+        if (normalizedMessage.includes('ajuda técnica')) {
+            return responses["ajuda técnica"];
+        }
+        if (normalizedMessage.includes('recibo')) {
+            return responses["recibo"];
+        }
+        if (normalizedMessage.includes('contato')) {
+            return responses["contato"];
+        }
+        if (normalizedMessage.includes('alterar dados') || normalizedMessage.includes('pessoais')) {
+            return responses["alterar dados pessoais"];
+        }
+        if (normalizedMessage.includes('estágio do pedido')) {
+            return responses["estágio do pedido"];
+        }
+        if (normalizedMessage.includes('endereços de entrega')) {
+            return responses["endereços de entrega"];
+        }
+        if (normalizedMessage.includes('trocas')) {
+            return responses["trocas"];
+        }
+        if (normalizedMessage.includes('comprar presente')) {
+            return responses["comprar presente"];
+        }
+        if (normalizedMessage.includes('promoções atuais')) {
+            return responses["promoções atuais"];
+        }
+        if (normalizedMessage.includes('prazos de pagamento')) {
+            return responses["prazos de pagamento"];
+        }
+        if (normalizedMessage.includes('certificados')) {
+            return responses["certificados"];
+        }
+        if (normalizedMessage.includes('apoio ao cliente')) {
+            return responses["apoio ao cliente"];
+        }
+        if (normalizedMessage.includes('envios')) {
+            return responses["envios"];
+        }
+
+        // Resposta padrão para perguntas não reconhecidas
+        return "Desculpe, não consegui encontrar uma resposta para a sua pergunta. Poderia reformular?";
+    }
+});
+
+    </script>
+</body>
+</html>
